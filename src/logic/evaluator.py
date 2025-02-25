@@ -1,21 +1,25 @@
-import string
-
 def evaluar_fortaleza(contraseña):
-    """Evalúa la seguridad de una contraseña en base a su complejidad."""
-    
-    puntuacion = 0
-    if any(c.islower() for c in contraseña):
-        puntuacion += 1
-    if any(c.isupper() for c in contraseña):
-        puntuacion += 1
-    if any(c.isdigit() for c in contraseña):
-        puntuacion += 1
-    if any(c in string.punctuation for c in contraseña):
-        puntuacion += 1
+    """ Evalúa la fortaleza de una contraseña basada en su longitud y variedad de caracteres """
+    longitud = len(contraseña)
+    tiene_mayus = any(c.isupper() for c in contraseña)
+    tiene_numeros = any(c.isdigit() for c in contraseña)
+    tiene_simbolos = any(c in "!@#$%^&*()_+{}[]:;<>,.?/" for c in contraseña)
 
-    if len(contraseña) >= 12 and puntuacion >= 3:
-        return "Fuerte 🔒"
-    elif len(contraseña) >= 8 and puntuacion >= 2:
+    puntaje = 0
+    if longitud >= 12:
+        puntaje += 2
+    elif longitud >= 8:
+        puntaje += 1
+    if tiene_mayus:
+        puntaje += 1
+    if tiene_numeros:
+        puntaje += 1
+    if tiene_simbolos:
+        puntaje += 1
+
+    if puntaje >= 4:
+        return "Fuerte 💪"
+    elif puntaje == 3:
         return "Moderada ⚠️"
     else:
         return "Débil ❌"

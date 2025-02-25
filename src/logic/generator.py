@@ -1,11 +1,10 @@
 import random
 import string
 
-def generar_contraseña(longitud=12, incluir_mayusculas=True, incluir_numeros=True, incluir_simbolos=True):
-    """Genera una contraseña segura basada en los parámetros indicados."""
-    
+def generar_contraseña(longitud, incluir_mayus, incluir_numeros, incluir_simbolos):
+    """ Genera una contraseña aleatoria con los criterios seleccionados """
     caracteres = string.ascii_lowercase
-    if incluir_mayusculas:
+    if incluir_mayus:
         caracteres += string.ascii_uppercase
     if incluir_numeros:
         caracteres += string.digits
