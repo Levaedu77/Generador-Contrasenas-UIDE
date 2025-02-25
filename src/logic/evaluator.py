@@ -1,16 +1,21 @@
-import re
+import string
 
 def evaluar_fortaleza(contraseña):
-    """Evalúa la fortaleza de una contraseña y devuelve su nivel de seguridad."""
+    """Evalúa la seguridad de una contraseña en base a su complejidad."""
+    
     puntuacion = 0
-    if len(contraseña) >= 12:
+    if any(c.islower() for c in contraseña):
+        puntuacion += 1
+    if any(c.isupper() for c in contraseña):
         puntuacion += 1
     if any(c.isdigit() for c in contraseña):
         puntuacion += 1
-    if any(c.islower() for c in contraseña) and any(c.isupper() for c in contraseña):
-        puntuacion += 1
-    if re.search(r"[!@#$%^&*(),.?\":{}|<>]", contraseña):
+    if any(c in string.punctuation for c in contraseña):
         puntuacion += 1
 
-    niveles = ["Débil", "Moderada", "Fuerte", "Muy Fuerte"]
-    return niveles[puntuacion] if puntuacion > 0 else "Muy Débil"
+    if len(contraseña) >= 12 and puntuacion >= 3:
+        return "Fuerte 🔒"
+    elif len(contraseña) >= 8 and puntuacion >= 2:
+        return "Moderada ⚠️"
+    else:
+        return "Débil ❌"
