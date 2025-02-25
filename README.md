@@ -18,4 +18,4 @@ Este es un proyecto en Python que genera contraseñas seguras basadas en diferen
 ![Diagrama de Arquitectura](docs/arquitectura.png)
 
 
-"Añadiendo diagramas al README"
+
