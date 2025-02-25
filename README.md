@@ -17,5 +17,8 @@ Este es un proyecto en Python que genera contraseñas seguras basadas en diferen
 ### 🔹 Arquitectura del Sistema
 ![Diagrama de Arquitectura](docs/arquitectura.png)
 
+### 🔹 Diagrama de Flujo
+![Diagrama de Flujo](docs/diagrama_flujo.png)
+
 
 
