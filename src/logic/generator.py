@@ -1,8 +1,12 @@
 import random
 import string
 
-def generar_contraseña(longitud, incluir_mayus, incluir_numeros, incluir_simbolos):
-    """ Genera una contraseña aleatoria con los criterios seleccionados """
+def generar_contraseña(longitud=12, incluir_mayus=True, incluir_numeros=True, incluir_simbolos=True):
+    """Genera una contraseña segura con los parámetros especificados."""
+    
+    if longitud < 8:
+        raise ValueError("La contraseña debe tener al menos 8 caracteres.")
+
     caracteres = string.ascii_lowercase
     if incluir_mayus:
         caracteres += string.ascii_uppercase
@@ -11,4 +15,5 @@ def generar_contraseña(longitud, incluir_mayus, incluir_numeros, incluir_simbol
     if incluir_simbolos:
         caracteres += string.punctuation
 
-    return ''.join(random.choice(caracteres) for _ in range(longitud))
+    contraseña = ''.join(random.choice(caracteres) for _ in range(longitud))
+    return contraseña

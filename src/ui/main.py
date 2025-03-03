@@ -1,74 +1,55 @@
-import src.logic.generator as generator
-import src.logic.evaluator as evaluator
-import src.storage.database as database
+import time
+import pyperclip
+from src.logic.generator import generar_contraseña
+from src.logic.evaluator import evaluar_fortaleza
+from src.storage.database import guardar_contraseña, mostrar_contraseñas, generar_otp, validar_otp
 
-def mostrar_menu():
-    """ Muestra las opciones del menú """
-    print("\n🔑 Generador de Contraseñas Seguras 🔒")
-    print("1️⃣ Generar una nueva contraseña")
-    print("2️⃣ Ver y copiar contraseñas guardadas")
-    print("3️⃣ Salir del programa")
-
-def main():
-    """ Función principal del programa """
-    database.vaciar_archivo()  # Vaciar el archivo de contraseñas al iniciar el programa
-
+def menu():
     while True:
-        mostrar_menu()
-        opcion = input("\n👉 Opción: ").strip()
+        print("\n🔐 Generador de Contraseñas Seguras 🔐")
+        print("1️⃣ Generar una nueva contraseña")
+        print("2️⃣ Ver y copiar contraseñas guardadas (Requiere OTP)")
+        print("3️⃣ Salir del programa")
+        
+        opcion = input("👉 Opción: ")
 
         if opcion == "1":
+            longitud = int(input("Ingrese la longitud de la contraseña (mínimo 8): "))
+            incluir_mayus = input("¿Incluir mayúsculas? (s/n): ").strip().lower() == "s"
+            incluir_numeros = input("¿Incluir números? (s/n): ").strip().lower() == "s"
+            incluir_simbolos = input("¿Incluir símbolos? (s/n): ").strip().lower() == "s"
+
             try:
-                longitud = int(input("Ingrese la longitud de la contraseña (mínimo 8): "))
-                if longitud < 8:
-                    print("⚠️ La contraseña debe tener al menos 8 caracteres.")
-                    continue
-
-                incluir_mayus = input("¿Incluir mayúsculas? (s/n): ").strip().lower() == "s"
-                incluir_numeros = input("¿Incluir números? (s/n): ").strip().lower() == "s"
-                incluir_simbolos = input("¿Incluir símbolos? (s/n): ").strip().lower() == "s"
-
-                contraseña = generator.generar_contraseña(longitud, incluir_mayus, incluir_numeros, incluir_simbolos)
-                fortaleza = evaluator.evaluar_fortaleza(contraseña)
-
+                contraseña = generar_contraseña(longitud, incluir_mayus, incluir_numeros, incluir_simbolos)
                 print(f"\n✅ Contraseña generada: {contraseña}")
-                print(f"🔵 Fortaleza de la contraseña: {fortaleza}")
+                print(f"🟢 Fortaleza de la contraseña: {evaluar_fortaleza(contraseña)}")
 
-                if input("¿Desea guardar la contraseña? (s/n): ").strip().lower() == "s":
-                    database.guardar_contraseña(contraseña)
-                    print("💾 Contraseña guardada exitosamente.")
-            
-            except ValueError:
-                print("❌ Error: Debe ingresar un número válido para la longitud.")
+                # Copiar al portapapeles automáticamente
+                pyperclip.copy(contraseña)
+                print("📋 Contraseña copiada al portapapeles automáticamente.")
+
+                if input("\n¿Desea guardar esta contraseña? (s/n): ").strip().lower() == "s":
+                    guardar_contraseña(contraseña)
+            except ValueError as e:
+                print(f"⚠️ {e}")
 
         elif opcion == "2":
-            contraseñas_guardadas = database.obtener_contraseñas()
-            if not contraseñas_guardadas:
-                print("⚠️ No hay contraseñas almacenadas.")
-                continue
+            otp = generar_otp()
+            print(f"\n🔑 Tu código OTP es: {otp} (válido por 3 minutos)")
 
-            print("\n📜 Lista de Contraseñas Guardadas:")
-            for i, pwd in enumerate(contraseñas_guardadas, 1):
-                print(f"{i}. {pwd}")
+            codigo_ingresado = input("🔑 Ingresa el código OTP: ")
+            valido, mensaje = validar_otp(codigo_ingresado)
 
-            try:
-                seleccion = int(input("\nIngrese el número de la contraseña que desea copiar: ")) - 1
-                if 0 <= seleccion < len(contraseñas_guardadas):
-                    import pyperclip
-                    pyperclip.copy(contraseñas_guardadas[seleccion])
-                    print("📋 Contraseña copiada al portapapeles.")
-                else:
-                    print("❌ Número inválido.")
-
-            except ValueError:
-                print("❌ Entrada no válida.")
+            if valido:
+                mostrar_contraseñas()
+            else:
+                print(mensaje)
 
         elif opcion == "3":
-            print("👋 Saliendo del programa...")
+            print("👋 Saliendo del programa. ¡Hasta pronto!")
             break
-
         else:
-            print("❌ Opción no válida. Intente de nuevo.")
+            print("❌ Opción inválida. Inténtalo de nuevo.")
 
 if __name__ == "__main__":
-    main()
+    menu()
