@@ -38,15 +38,22 @@ El objetivo principal de este software es facilitar la creación y gestión de c
 📜 Diagramas del Proyecto
 Estos diagramas representan el flujo y la arquitectura del proyecto:
 
-📌 Diagrama de Flujo - Menú Principal
+## 📜 Diagramas del Proyecto  
 
-📌 Diagrama de Flujo - Generar Contraseña
+### 📌 Diagrama de Flujo - Menú Principal
+![Menú Principal](docs/diagrama_flujo_menu_principal.png)
 
-📌 Diagrama de Flujo - Gestión de Contraseñas Guardadas
+### 📌 Diagrama de Flujo - Generar Contraseña
+![Generar Contraseña](docs/diagrama_flujo_generar_contrasena.png)
 
-📌 Casos de Uso
+### 📌 Diagrama de Flujo - Gestión de Contraseñas Guardadas
+![Gestión de Contraseñas](docs/diagrama_flujo_gestion_contrasenas_guardadas.png)
 
-📌 Arquitectura del Sistema
+### 📌 Casos de Uso
+![Casos de Uso](docs/casos_de_uso.png)
+
+### 📌 Arquitectura del Sistema
+![Arquitectura](docs/arquitectura.png)
 
 🚀 Ejecución del Programa
 Para ejecutar la aplicación en PowerShell o Git Bash, usa el siguiente comando:
