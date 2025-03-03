@@ -22,18 +22,17 @@ El objetivo principal de este software es facilitar la creación y gestión de c
 
 🛠️ Estructura del Proyecto
 📂 Generador-Contrasenas-UIDE/
- ├── 📂 docs/               # Diagramas y documentación del proyecto
- ├── 📂 src/                # Código fuente del proyecto
- │   ├── 📂 logic/          # Módulo de generación de contraseñas
- │   ├── 📂 storage/        # Módulo de almacenamiento de contraseñas
- │   ├── 📂 ui/             # Interfaz en línea de comandos (CLI)
- │   ├── __init__.py
- │   ├── main.py           # Archivo principal del programa
- ├── .gitignore
- ├── README.md             # Documento de presentación del proyecto
- ├── requirements.txt      # Librerías necesarias
- ├── contraseñas.json      # Archivo donde se almacenan las contraseñas
-
+├── 📂 docs/ – Contiene la documentación y los diagramas del proyecto.
+├── 📂 src/ – Directorio principal del código fuente.
+│ ├── 📂 logic/ – Módulo encargado de la generación de contraseñas.
+│ ├── 📂 storage/ – Módulo para el almacenamiento de contraseñas.
+│ ├── 📂 ui/ – Interfaz en línea de comandos (CLI).
+│ ├── init.py – Archivo para convertir src en un paquete de Python.
+│ ├── main.py – Archivo principal que ejecuta el programa.
+├── .gitignore – Define los archivos y carpetas a excluir en Git.
+├── README.md – Documentación introductoria y detalles del proyecto.
+├── requirements.txt – Lista de librerías necesarias para el funcionamiento.
+├── contraseñas.json – Archivo donde se almacenan las contraseñas generadas.
 
 📜 Diagramas del Proyecto
 Estos diagramas representan el flujo y la arquitectura del proyecto:
